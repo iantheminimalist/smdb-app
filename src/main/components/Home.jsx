@@ -1,17 +1,27 @@
 
 import '../assets/home.css';
+import { MovieCarousel } from './MovieCarousel';
 
 export default function Home() {
   return (
-    <div className='container h-screen flex flex-col justify-center items-center place-content-center'>
-       <h1 className='className="text-3xl font-bold underline leading-10'>
+    <div className='container h-screen flex flex-col justify-center items-center place-content-center '>
+       <p className='text-6xl font-bold  text-white my-4 py-4'>
         Simple Movie DB
-       </h1>
+       </p>
 
-       <div className='columns-3'>
-            <div>one</div>
-            <div>two`</div>
-            <div>three</div>
+       <div className='container'>
+            <div>
+                <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis cumque explicabo, dolorem deleniti iste libero sunt voluptate, sequi fuga, dolor adipisci accusantium voluptatibus earum. Beatae ut quaerat architecto quam blanditiis.
+                </p>
+            </div>
+
+       </div>
+       <div className='container'>
+            <div>
+                <MovieCarousel />
+            </div>
+
        </div>
         </div>
   )
