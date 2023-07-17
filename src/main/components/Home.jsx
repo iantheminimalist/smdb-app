@@ -9,7 +9,7 @@ export default function Home() {
         Simple Movie DB
        </p>
 
-       <div className='container'>
+       <div className='container text-center text-white'>
             <div>
                 <p>
                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis cumque explicabo, dolorem deleniti iste libero sunt voluptate, sequi fuga, dolor adipisci accusantium voluptatibus earum. Beatae ut quaerat architecto quam blanditiis.
