@@ -1,10 +1,11 @@
 
 
 import {  useReducer, useEffect } from 'react'
-import axios from 'axios';
+// import axios from 'axios';
 import {INITIAL_STATE, fetchMovies } from './getReducers';
 import * as ActionTypes from './ActionTypes';
-import { baseURL } from '../shared/baseURL';
+// import { baseURL } from '../shared/baseURL';
+
 
 
 export const MovieCarousel = () => {
@@ -13,13 +14,14 @@ export const MovieCarousel = () => {
   const handleFetch = () =>{
       //fetch all jobs
       dispatch({type: ActionTypes.MOVIE_FETCH_LOADING })
-      axios.get(baseURL + "/movies")
+      // axios.get(baseURL + "/movies")
+      fetch('movies.json')
       .then((res) => {
-          return res.data; 
+          return res.json(); 
       })
-      .then((data) => {
-          console.log(data)
-          dispatch({ type: ActionTypes.MOVIE_FETCH_SUCCESS, payload: data})
+      .then((res) => {
+          console.log(res)
+          dispatch({ type: ActionTypes.MOVIE_FETCH_SUCCESS, payload: res.movies})
       })
       .catch((err) => {  
           dispatch({ type: ActionTypes.MOVIE_FETCH_FAILED})
@@ -33,18 +35,19 @@ useEffect(() => {
 
 }, [])
 
-
+// console.log(state.movies)
 
   return (
     
     <div>
 
-{state.movies.map((movie) => (
+      {state.movies.filter((_movie, idx) => idx < 5).map(movie => (
         <div key={movie.id}>
           <h2>{movie.title}</h2>
-          <p>{movie.description}</p>
         </div>
       ))}
+
+      
     </div>
   )
 }

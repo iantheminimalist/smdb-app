@@ -1,4 +1,5 @@
-[
+{
+    "movies": [
     {
        "title":"The Godfather",
        "genre":"Crime",
@@ -598,5 +599,8 @@
         "title": "Indiana Jones and the Last Crusade",
         "rank": "100",
         "id": "tt0097576"
-    }]
+    
+        }
+    ]
+}
  
