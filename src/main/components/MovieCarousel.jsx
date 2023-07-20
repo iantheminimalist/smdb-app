@@ -36,14 +36,15 @@ useEffect(() => {
 }, [])
 
 // console.log(state.movies)
-
+// let randomMovies = Math.floor(Math.random() * state.movies.length)
+// console.log(randomMovies);
   return (
     
     <div>
 
-      {state.movies.filter((_movie, idx) => idx < 5).map(movie => (
+      {state.movies.filter((_movie, idx) => idx < 5).map((movie) => (
         <div key={movie.id}>
-          <h2>{movie.title}</h2>
+          <h2 className='text-white'>{movie.title}</h2>
         </div>
       ))}
 
