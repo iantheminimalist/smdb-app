@@ -1,15 +1,19 @@
 
 
-import {  useReducer, useEffect } from 'react'
+import {  useReducer, useEffect, useState } from 'react'
 // import axios from 'axios';
 import {INITIAL_STATE, fetchMovies } from './getReducers';
 import * as ActionTypes from './ActionTypes';
 // import { baseURL } from '../shared/baseURL';
-
-
+// import {movieURL} from '../shared/baseURL';
+const movieURL = `https://www.omdbapi.com/?apikey=${import.meta.env.VITE_APP_MOVIE_API_KEY}&t=`
 
 export const MovieCarousel = () => {
   const [state, dispatch] = useReducer(fetchMovies, INITIAL_STATE)
+
+  const [randomMovies, setRandomMovies] = useState([]);
+  const [movieDetails, setMovieDetails] = useState([]);
+
 
   const handleFetch = () =>{
       //fetch all jobs
@@ -35,20 +39,49 @@ useEffect(() => {
 
 }, [])
 
-// console.log(state.movies)
-// let randomMovies = Math.floor(Math.random() * state.movies.length)
-// console.log(randomMovies);
+useEffect(() => {
+  if (state.movies.length > 0) {
+    const getRandomMovies = () => {
+      let moviesArr = [];
+      while (moviesArr.length < 5) {
+        let randomIndex = Math.floor(Math.random() * state.movies.length);
+        if (!moviesArr.includes(randomIndex)) {
+
+          moviesArr.push(randomIndex);
+        }
+      }
+      return moviesArr.map((index) => state.movies[index]);
+    };
+
+    setRandomMovies(getRandomMovies());
+  }
+}, [state.movies]);
+
+
+useEffect(() => {
+  if (randomMovies.length > 0) {
+    const fetchMovieDetails = async () => {
+      const promises = randomMovies.map((movie) => fetch(`${movieURL}${movie.title}`).then((res) => res.json()));
+      const movieDetails = await Promise.all(promises);
+      setMovieDetails(movieDetails);
+    };
+
+    fetchMovieDetails();
+  }
+}, [randomMovies]);
+
+
+console.log(movieDetails);
   return (
     
-    <div>
-
-      {state.movies.filter((_movie, idx) => idx < 5).map((movie) => (
-        <div key={movie.id}>
-          <h2 className='text-white'>{movie.title}</h2>
+    <div className='container flex justify-center items-center content-center'>
+      {movieDetails.map((movie) => (
+        <div key={movie.movieDetails} className='container w-100 flex justify-center content-center items-center flex-col my-3 '>
+          <h4 className='text-white my-5 h-100'>{movie.Title}</h4>
+          {/* <p>{movie.Plot}</p>   */}
+          <img src={movie.Poster} className='poster-size' />
         </div>
       ))}
-
-      
     </div>
   )
 }
