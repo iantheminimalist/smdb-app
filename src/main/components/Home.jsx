@@ -1,10 +1,11 @@
 
+// import Navbar from '../../navbar/navbar';
 import '../assets/home.css';
 import { MovieCarousel } from './MovieCarousel';
 
 export default function Home() {
   return (
-    <div className='container h-screen flex flex-col justify-center items-center place-content-center '>
+    <div className='container h-full flex flex-col justify-center items-center place-content-center '>
        <p className='text-6xl font-bold  text-white my-4 py-4'>
         Simple Movie DB
        </p>
@@ -19,7 +20,7 @@ export default function Home() {
        </div>
        <div className='container'>
             <div>
-                <MovieCarousel />
+              <MovieCarousel />
             </div>
 
        </div>

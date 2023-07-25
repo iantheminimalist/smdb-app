@@ -10,7 +10,6 @@ const movieURL = `https://www.omdbapi.com/?apikey=${import.meta.env.VITE_APP_MOV
 
 export const MovieCarousel = () => {
   const [state, dispatch] = useReducer(fetchMovies, INITIAL_STATE)
-
   const [randomMovies, setRandomMovies] = useState([]);
   const [movieDetails, setMovieDetails] = useState([]);
 
@@ -35,10 +34,8 @@ export const MovieCarousel = () => {
 
 useEffect(() => {
  handleFetch()
- 
-
 }, [])
-
+// grabs all top 100 movies and randomizes them.
 useEffect(() => {
   if (state.movies.length > 0) {
     const getRandomMovies = () => {
@@ -57,7 +54,7 @@ useEffect(() => {
   }
 }, [state.movies]);
 
-
+// fetch retech request to get all random movies metadata from OMDB API
 useEffect(() => {
   if (randomMovies.length > 0) {
     const fetchMovieDetails = async () => {
@@ -70,16 +67,16 @@ useEffect(() => {
   }
 }, [randomMovies]);
 
-
-console.log(movieDetails);
   return (
     
-    <div className='container flex justify-center items-center content-center'>
+    <div className='container flex justify-evenly items-center content-center flex-row flex-wrap my-9 py-9'>
       {movieDetails.map((movie) => (
-        <div key={movie.movieDetails} className='container w-100 flex justify-center content-center items-center flex-col my-3 '>
-          <h4 className='text-white my-5 h-100'>{movie.Title}</h4>
-          {/* <p>{movie.Plot}</p>   */}
-          <img src={movie.Poster} className='poster-size' />
+        <div key={movie.imdbID} className='relative transition ease-in-out  hover:scale-110  duration-300 '>
+          <button id={movie.imdbID}>
+          <div className='absolute w-full h-80 backdrop-blur-sm bg-white/30 rounded-2xl transition ease-in-out hover:backdrop-blur-none hover:bg-white/0 duration-300'></div>
+
+            <img src={movie.Poster} className="w-full h-80 object-cover  rounded-2xl " />
+          </button>
         </div>
       ))}
     </div>
