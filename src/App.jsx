@@ -2,12 +2,16 @@
 
 import './App.css'
 import Home from './main/components/Home'
+import Navbar from './navbar/navbar'
 
 function App() {
 
   return (
     <>
-    <div className='h-full'>
+    <div>
+      <Navbar />
+    </div>
+    <div className=' md:h-screen container'>
       <Home />
     </div>
 

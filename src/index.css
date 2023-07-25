@@ -2,10 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-.poster-size{
-  width: 200px;
-  height: 300px;
-}
 /* 
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
