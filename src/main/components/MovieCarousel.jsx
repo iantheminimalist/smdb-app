@@ -71,11 +71,10 @@ useEffect(() => {
     
     <div className='container flex justify-evenly items-center content-center flex-row flex-wrap my-9 py-9'>
       {movieDetails.map((movie) => (
-        <div key={movie.imdbID} className='relative transition ease-in-out  hover:scale-110  duration-300 '>
+        <div key={movie.imdbID} className='relative transition ease-in  hover:scale-110 duration-150 '>
           <button id={movie.imdbID}>
-          <div className='absolute w-full h-80 backdrop-blur-sm bg-white/30 rounded-2xl transition ease-in-out hover:backdrop-blur-none hover:bg-white/0 duration-300'></div>
-
-            <img src={movie.Poster} className="w-full h-80 object-cover  rounded-2xl " />
+          <div className='absolute w-full h-80 backdrop-blur-none bg-white/0 transition ease-in hover:backdrop-blur-sm hover:bg-black/30 duration-150'></div>
+            <img src={movie.Poster} className="w-full h-80 object-cover" />
           </button>
         </div>
       ))}
