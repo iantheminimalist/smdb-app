@@ -2,14 +2,14 @@
 
 import './App.css'
 import Home from './main/components/Home'
-import Navbar from './navbar/navbar'
+// import Navbar from './navbar/navbar'
 
 function App() {
 
   return (
     <>
     <div>
-      <Navbar />
+      {/* <Navbar /> */}
     </div>
     <div className=' md:h-screen container'>
       <Home />
