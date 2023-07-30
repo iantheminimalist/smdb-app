@@ -1,11 +1,10 @@
 
 
-import {  useReducer, useEffect, useState } from 'react'
-// import axios from 'axios';
+import {  useReducer, useEffect, useState, useRef } from 'react'
+import { motion } from 'framer-motion';
 import {INITIAL_STATE, fetchMovies } from './getReducers';
 import * as ActionTypes from './ActionTypes';
-// import { baseURL } from '../shared/baseURL';
-// import {movieURL} from '../shared/baseURL';
+
 const movieURL = `https://www.omdbapi.com/?apikey=${import.meta.env.VITE_APP_MOVIE_API_KEY}&t=`
 
 export const MovieCarousel = () => {
@@ -40,7 +39,7 @@ useEffect(() => {
   if (state.movies.length > 0) {
     const getRandomMovies = () => {
       let moviesArr = [];
-      while (moviesArr.length < 5) {
+      while (moviesArr.length < 7) {
         let randomIndex = Math.floor(Math.random() * state.movies.length);
         if (!moviesArr.includes(randomIndex)) {
 
@@ -67,18 +66,41 @@ useEffect(() => {
   }
 }, [randomMovies]);
 
+// const [width, setWidth] = useState(0)
+const carousel = useRef();
+
+
+// useEffect(() => {
+//   console.log(carousel.current);
+// },[]);
+
   return (
-    
-    <div className='container flex justify-evenly items-center content-center flex-row flex-wrap my-9 py-9'>
-      {movieDetails.map((movie) => (
-        <div key={movie.imdbID} className='relative transition ease-in  hover:scale-110 duration-150 '>
-          <button id={movie.imdbID}>
-          <div className='absolute w-full h-80 backdrop-blur-none bg-white/0 transition ease-in hover:backdrop-blur-sm hover:bg-black/30 duration-150'></div>
-            <img src={movie.Poster} className="w-full h-80 object-cover" />
-          </button>
-        </div>
-      ))}
+    <div>
+    <motion.div ref={carousel} className='overflow-hidden'>
+      <motion.div 
+      drag='x'
+      dragConstraints={{right: 0}}
+      className=' '
+      >
+    <div className='relative flex   flex-row   '>
+
+    {movieDetails.map((movie) => (
+      <motion.div key={movie.imdbID} className='m-3'>
+      <div key={movie.imdbID} className='relative  w-full'>
+        <button id={movie.imdbID} className='relative  w-60 h-80'>
+        <div className='absolute w-60 h-80 backdrop-blur-none bg-white/0 transition ease-in hover:backdrop-blur-sm hover:bg-black/30 duration-150'></div>
+          <img src={movie.Poster} className="w-60 h-80" />
+        </button>
+      </div>
+      </motion.div>
+
+    ))}
     </div>
+    </motion.div>
+    </motion.div>
+    </div>
+
+
   )
 }
 
